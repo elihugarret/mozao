@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="geo">
+    </div>
+  </body>
+
+  <!-- Script de geolocalización -->
+  <script type="text/javascript">
+    // Obtener elmento del DOM
+    var g = document.getElementById('geo');
+
+    // función que genera e inserta la imagen de Google Maps en un elemento
+    function  showPosition(position){
+      var latitud_y_longitud = position.coords.latitude
+                             + ","
+                             + position.coords.longitude;
+      var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="
+                  + latitud_y_longitud
+                  + "&zoom=14&size=400x300&sensor=false&key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU";
+      // Escribe un elemento <img> dentro del div
+      g.innerHTML = "<img src='" + img_url + "'>";
+    }
+
+    // Función que obtiene las coordenadas
+    function geolocation(){
+      if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        g.innerHTML = "Browser no soporta geolocalización";
+      }
+    }
+
+    geolocation();
+  </script>
+</html>
